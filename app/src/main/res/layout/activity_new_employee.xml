@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NewEmployeeActivity">
+
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/toolbar"
+        app:title="Add New Employee"
+        android:background="@color/colorPrimaryDark"
+        android:theme="@style/Base.ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/MenuStyle"
+        app:navigationIcon="?attr/homeAsUpIndicator">
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_below="@id/toolbar"
+        android:padding="16dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add New Employee"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/emp_name"
+            android:layout_marginTop="10dp"
+            app:met_floatingLabel="normal"
+            android:hint="Employee Name"/>
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/emp_mobile"
+            android:inputType="number"
+            android:layout_marginTop="10dp"
+            app:met_floatingLabel="normal"
+            android:hint="Mobile Number"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select Counter"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="1dp"/>
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:spinnerMode="dialog"
+            android:layout_marginTop="5dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="1dp"
+            android:prompt="@string/spinner_title"
+            android:background="@drawable/borderbg"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+
+            />
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Employee"
+
+            android:id="@+id/btn_add"
+            android:background="@color/colorPrimaryDark"
+            android:layout_marginTop="10dp"
+            android:textColor="#fff"/>
+
+        <ProgressBar
+            android:id="@+id/NewProgressBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="-47dp"/>
+
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

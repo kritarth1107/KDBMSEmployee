@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="10dp"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="40dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_height="40dp"
+            android:id="@+id/profile_image"
+            android:src="@drawable/default_profile_image"/>
+
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/user_layout2"
+        android:layout_marginLeft="50dp"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/EmployeeName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_marginLeft="14dp"
+
+                android:text="Jhon Doe"
+                android:textColor="#000"
+
+                android:textSize="18sp" />
+            <TextView
+                android:id="@+id/PhoneNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_marginLeft="14dp"
+                android:layout_below="@id/EmployeeName"
+                android:text="+91 00000 00000"
+                android:textColor="@color/Grey"
+
+                android:textSize="15sp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ProceedeeEmployeeButton"
+                android:layout_width="25dp"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_height="40dp"
+                app:civ_circle_background_color="@color/colorAccent"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/ic_keyboard_arrow_right"/>
+
+
+        </RelativeLayout>
+
+
+
+
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:background="@color/background"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/user_layout2"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="60dp"></LinearLayout>
+
+
+</RelativeLayout>

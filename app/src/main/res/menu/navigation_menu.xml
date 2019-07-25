@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_newEmp"
+            android:icon="@drawable/ic_person_add"
+            android:title="Add New Employee"
+            />
+        <item android:id="@+id/nav_newCounter"
+            android:icon="@drawable/ic_playlist_add"
+            android:title="Add New Counter"
+            />
+    </group>
+    <item android:title="Communication" >
+        <menu>
+            <item android:id="@+id/nav_cc"
+                android:icon="@drawable/ic_add"
+                android:title="Comm"
+                />
+            <item android:id="@+id/nav_cc2"
+                android:icon="@drawable/ic_add"
+                android:title="Comm 2"
+                />
+        </menu>
+    </item>
+</menu>
