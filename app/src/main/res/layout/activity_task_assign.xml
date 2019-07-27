@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TaskAssignActivity">
+    <android.support.v7.widget.Toolbar
+        app:title="Assign Tasks"
+        app:titleTextColor="@color/white"
+        android:id="@+id/toolbar"
+        android:elevation="0dp"
+        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimaryDark"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        />
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout1Task"
+        android:layout_below="@id/toolbar"
+        android:padding="15dp"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/assignTaskTV"
+                    android:textAlignment="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Assign Task to Staff"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+        <TextView
+
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/assignTaskTV"
+            android:text="टास्क को असाइन करने के लिए, निम्नलिखित पूछे गए विवरण भरें और उस कर्मचारी को चुनें जिसे आप उस कार्य को असाइन करना चाहते हैं"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:padding="15dp"
+        android:layout_below="@id/RelativeLayout1Task"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <EditText
+            android:id="@+id/taskET"
+            android:minHeight="100dp"
+            android:padding="10dp"
+            android:hint="Enter Task"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/borderbg"/>
+        <TextView
+            android:layout_marginTop="15dp"
+            android:id="@+id/TvEmp"
+            android:layout_below="@id/taskET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select Employee"
+            android:textColor="@android:color/black"/>
+        <Spinner
+            android:id="@+id/taskSpinner"
+            android:layout_marginTop="5dp"
+            android:padding="10dp"
+            android:background="@drawable/borderbg"
+            android:layout_below="@id/TvEmp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </Spinner>
+
+        <EditText
+            android:layout_below="@+id/taskSpinner"
+            android:id="@+id/targetET"
+            android:padding="10dp"
+            android:hint="Target (in Days)"
+            android:layout_marginTop="15dp"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/borderbg"
+            android:inputType="number"
+            android:maxLength="2"/>
+        <Button
+            android:id="@+id/AssignButton"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/targetET"
+            android:background="@color/colorPrimary"
+            android:textColor="@android:color/white"
+            android:text="Assign Task / कार्य सौंपें"/>
+
+    </RelativeLayout>
+</RelativeLayout>

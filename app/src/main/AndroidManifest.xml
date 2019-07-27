@@ -4,12 +4,13 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/kdbmslogo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/kdbmslogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AttendanceActivity"></activity>
+        <activity android:name=".TaskAssignActivity"></activity>
+        <activity android:name=".AttendanceActivity" />
         <activity android:name=".EmpActivity" />
         <activity android:name=".NewCounterActivity" />
         <activity android:name=".NewEmployeeActivity" />

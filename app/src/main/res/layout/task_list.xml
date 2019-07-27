@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="8dp"
+    android:elevation="5dp"
+    android:layout_marginBottom="15dp">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:padding="10dp"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/dateTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Date"/>
+
+    <TextView
+        android:id="@+id/taskTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dateTV"
+        android:text="Task............."
+        android:textColor="@android:color/black"
+        android:textSize="20sp"/>
+    <ImageView
+        android:id="@+id/accessTime"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/taskTextView"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/ic_access_time"/>
+    <TextView
+        android:id="@+id/TargetDaysTV"
+        android:layout_marginLeft="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="01 Days"
+        android:layout_below="@id/taskTextView"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@id/accessTime"
+        android:textSize="15sp"/>
+    <LinearLayout
+        android:id="@+id/AttLayout"
+        android:layout_marginTop="45dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/taskTextView"
+        >
+        <Button
+            android:id="@+id/CompletedButton"
+            android:layout_margin="5dp"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:background="@android:color/holo_green_dark"
+            android:text="Completed"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".50" />
+
+        <Button
+            android:id="@+id/NotButton"
+            android:layout_margin="5dp"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:background="@android:color/holo_red_light"
+            android:text="Not Completed"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".50" />
+    </LinearLayout>
+</RelativeLayout>
+</android.support.v7.widget.CardView>

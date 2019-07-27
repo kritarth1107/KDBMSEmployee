@@ -16,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
@@ -23,6 +24,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
@@ -47,13 +49,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private List<Employee> mEmployee;
     CardView AttendanceCV, ReportCV, TaskCV;
     String date;
+    TextView notfounderror;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
+        notfounderror = findViewById(R.id.notfounderror);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -88,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-        mEmployee = new ArrayList<>();
+
         readEmployees();
 
         shimmerFrameLayout = findViewById(R.id.shimmer_view_container);
@@ -116,9 +119,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                     for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                                         Employee employee = snapshot.getValue(Employee.class);
                                         String empId = employee.getMobile();
+                                        String empName = employee.getName();
+                                        String empCounter = employee.getCounter();
                                         DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference("Attendance");
                                         HashMap<String, Object> hashMap = new HashMap<>();
                                         hashMap.put("empid", empId);
+                                        hashMap.put("empname", empName);
+                                        hashMap.put("counter", empCounter);
                                         hashMap.put("attendance", "NotSet");
 
                                         reference2.child(date).child("Attendance").push().setValue(hashMap);
@@ -143,22 +150,42 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+        TaskCV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,TaskAssignActivity.class);
+                intent.putExtra("date",date);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void readEmployees(){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Employee");
+        final int[] i = {0};
+        Query reference = FirebaseDatabase.getInstance().getReference().child("Employee").orderByChild("counter");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
+                mEmployee = new ArrayList<>();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     Employee s = dataSnapshot1.getValue(Employee.class);
                     mEmployee.add(s);
+                    i[0]++;
                 }
-                employeeAdapter = new EmployeeAdapter(MainActivity.this, mEmployee);
-                recyclerView.setAdapter(employeeAdapter);
-                shimmerFrameLayout.stopShimmerAnimation();
-                shimmerFrameLayout.setVisibility(View.GONE);
+                if(i[0]==0){
+                    notfounderror.setVisibility(View.VISIBLE);
+                    shimmerFrameLayout.stopShimmerAnimation();
+                    shimmerFrameLayout.setVisibility(View.GONE);
+                }
+                else{
+                    notfounderror.setVisibility(View.GONE);
+                    employeeAdapter = new EmployeeAdapter(MainActivity.this, mEmployee);
+                    recyclerView.setAdapter(employeeAdapter);
+                    shimmerFrameLayout.stopShimmerAnimation();
+                    shimmerFrameLayout.setVisibility(View.GONE);
+                }
+
 
 
             }
@@ -181,6 +208,58 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_newCounter:
                 Intent intent =new Intent(MainActivity.this,NewCounterActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.nav_Attendance:
+                DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("Attendance");
+                rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot snapshot) {
+                        if (snapshot.hasChild(date)) {
+                            // run some code
+                            Intent intent = new Intent(MainActivity.this,AttendanceActivity.class);
+                            intent.putExtra("date",date);
+                            startActivity(intent);
+                        }
+                        else{
+                            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Employee");
+
+                            reference.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                                        Employee employee = snapshot.getValue(Employee.class);
+                                        String empId = employee.getMobile();
+                                        String empName = employee.getName();
+                                        String empCounter = employee.getCounter();
+                                        DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference("Attendance");
+                                        HashMap<String, Object> hashMap = new HashMap<>();
+                                        hashMap.put("empid", empId);
+                                        hashMap.put("empname", empName);
+                                        hashMap.put("counter", empCounter);
+                                        hashMap.put("attendance", "NotSet");
+
+                                        reference2.child(date).child("Attendance").push().setValue(hashMap);
+                                    }
+
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+                            Toast.makeText(MainActivity.this, "Data Created: Click Again", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+                break;
+            case R.id.nav_assignTask:
+                Intent intent1 = new Intent(MainActivity.this,TaskAssignActivity.class);
+                startActivity(intent1);
                 break;
 
         }

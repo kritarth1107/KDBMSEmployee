@@ -1,7 +1,7 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:shimmer="http://schemas.android.com/tools"
     android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -25,7 +25,8 @@
             android:background="?attr/colorPrimaryDark"
             app:layout_scrollFlags="scroll|enterAlways"
             app:navigationIcon="?attr/homeAsUpIndicator"
-
+            android:theme="@style/Base.ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/MenuStyle"
             >
 
         </android.support.v7.widget.Toolbar>
@@ -35,26 +36,62 @@
     </android.support.design.widget.AppBarLayout>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/container"
-
+        android:layout_height="match_parent"
+        android:layout_below="@id/appbar">
+        <RelativeLayout
+            android:gravity="center"
+            android:padding="15dp"
+            android:id="@+id/EmpActivityRL2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:layout_below="@+id/tabs"/>
+            android:layout_height="wrap_content">
+            <TextView
+                android:textAlignment="center"
+                android:id="@+id/EmpActivityEmpName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Employee Name"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"/>
 
-        <android.support.design.widget.TabLayout
-            android:layout_marginTop="?attr/actionBarSize"
-            android:id="@+id/tabs"
-            android:background="?attr/colorPrimaryDark"
+            <TextView
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/EmpActivityEmpName"
+                android:text="यह उन कार्यों की सूची है जो अभी तक पूरे नहीं हुए हैं \n
+किसी कार्य को पूरा करने या पूरा न करने के लिए नीचे दिए गए विकल्प को चुनें"/>
+        </RelativeLayout>
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:padding="15dp"
+            android:id="@+id/shimmer_view_container2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabMode="fixed"
-            app:tabGravity="fill"
-            app:tabTextColor="@color/white"
-            android:layout_alignParentTop="true"/>
+            android:layout_below="@id/EmpActivityRL2"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            shimmer:duration="800">
+            <!-- Adding 7 rows of placeholders -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <include layout="@layout/shimmer_placeholder_task" />
+                <include layout="@layout/shimmer_placeholder_task" />
+                <include layout="@layout/shimmer_placeholder_task" />
+
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/RvTask"
+    android:padding="10dp"
+    android:layout_below="@id/EmpActivityRL2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+</android.support.v7.widget.RecyclerView>
+
+
     </RelativeLayout>
 
 

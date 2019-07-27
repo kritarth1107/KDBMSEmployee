@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,8 +15,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import agrawal.kritarth.kdbmsemployee.Adapter.AttendanceAdapter;
@@ -37,19 +40,33 @@ public class AttendanceActivity extends AppCompatActivity {
         date = i.getStringExtra("date");
         dateText = findViewById(R.id.dateText);
         dateText.setText(date);
+
         RV = findViewById(R.id.attRV);
         RV.setLayoutManager(new LinearLayoutManager(this));
         readATtEmp();
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // and this
+                finish();
+            }
+        });
     }
     private void readATtEmp(){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Attendance").child(date).child("Attendance");
+        Query reference = FirebaseDatabase.getInstance().getReference("Attendance").child(date).child("Attendance").orderByChild("counter");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
+                mAtt = new ArrayList<>();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     Attendance s = dataSnapshot1.getValue(Attendance.class);
-                    mAtt.add(s);
+                    if(s.getAttendance().equals("NotSet")){
+                        mAtt.add(s);
+                    }
+
                 }
                 attendanceAdapter = new AttendanceAdapter(AttendanceActivity.this, mAtt);
                 RV.setAdapter(attendanceAdapter);
