@@ -1,21 +1,20 @@
 package agrawal.kritarth.kdbmsemployee;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,7 +25,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.rengwuxian.materialedittext.MaterialEditText;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -38,8 +36,6 @@ import java.util.List;
 import agrawal.kritarth.kdbmsemployee.Adapter.EmployeeAdapter;
 import agrawal.kritarth.kdbmsemployee.model.Employee;
 
-import static java.security.AccessController.getContext;
-
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     FloatingActionButton fab,fab2;
     private RecyclerView recyclerView;
@@ -48,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private EmployeeAdapter employeeAdapter;
     private List<Employee> mEmployee;
     CardView AttendanceCV, ReportCV, TaskCV;
-    String date;
+    String date,day,month,year;
     TextView notfounderror;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +55,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         notfounderror = findViewById(R.id.notfounderror);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        //Date Setup
         DateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
         date = df.format(Calendar.getInstance().getTime());
+        DateFormat df1 = new SimpleDateFormat("dd");
+        day = df1.format(Calendar.getInstance().getTime());
+        DateFormat df2 = new SimpleDateFormat("MMM");
+        month = df2.format(Calendar.getInstance().getTime());
+        DateFormat df3 = new SimpleDateFormat("yyyy");
+        year = df3.format(Calendar.getInstance().getTime());
 
         AttendanceCV = findViewById(R.id.AttendanceCardView);
         ReportCV = findViewById(R.id.ReportCardView);
@@ -127,8 +129,39 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         hashMap.put("empname", empName);
                                         hashMap.put("counter", empCounter);
                                         hashMap.put("attendance", "NotSet");
+                                        hashMap.put("date",date);
+                                        hashMap.put("day",day);
+                                        hashMap.put("month",month);
+                                        hashMap.put("year",year);
 
                                         reference2.child(date).child("Attendance").push().setValue(hashMap);
+
+                                        final DatabaseReference rf=FirebaseDatabase.getInstance().getReference("Attendance-Report").child("2019");
+                                        rf.addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                if(dataSnapshot.hasChild("Aug")){}
+                                                else{
+                                                    Employee employee = dataSnapshot.getValue(Employee.class);
+                                                    String empId = employee.getMobile();
+                                                    String empName = employee.getName();
+                                                    String empCounter = employee.getCounter();
+                                                    HashMap<String, Object> hashMap = new HashMap<>();
+                                                    hashMap.put("empid",empId);
+                                                    hashMap.put("empname",empName);
+                                                    hashMap.put("empcounter",empCounter);
+                                                    hashMap.put("present",0);
+                                                    hashMap.put("absent",0);
+                                                    rf.child("Aug").child("Report").push().setValue(hashMap);
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                            }
+                                        });
+
                                     }
 
                                 }
@@ -154,6 +187,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,TaskAssignActivity.class);
+                intent.putExtra("date",date);
+                startActivity(intent);
+            }
+        });
+        ReportCV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,ReportActivity.class);
                 intent.putExtra("date",date);
                 startActivity(intent);
             }
@@ -237,6 +278,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         hashMap.put("empname", empName);
                                         hashMap.put("counter", empCounter);
                                         hashMap.put("attendance", "NotSet");
+                                        hashMap.put("date",date);
+                                        hashMap.put("day",day);
+                                        hashMap.put("month",month);
+                                        hashMap.put("year",year);
 
                                         reference2.child(date).child("Attendance").push().setValue(hashMap);
                                     }
@@ -261,6 +306,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent intent1 = new Intent(MainActivity.this,TaskAssignActivity.class);
                 startActivity(intent1);
                 break;
+                case R.id.nav_Feedback:
+                    Intent intent2 = new Intent(MainActivity.this,FeedbackActivity.class);
+                    startActivity(intent2);
+                    break;
+
 
         }
         drawer.closeDrawer(GravityCompat.START);

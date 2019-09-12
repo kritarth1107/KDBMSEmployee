@@ -3,18 +3,22 @@
     package="agrawal.kritarth.kdbmsemployee">
 
     <application
+
         android:allowBackup="true"
         android:icon="@drawable/kdbmslogo"
         android:label="@string/app_name"
         android:roundIcon="@drawable/kdbmslogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TaskAssignActivity"></activity>
+        <activity android:name=".Feedback2"></activity>
+        <activity android:name=".ReportActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".TaskAssignActivity" />
         <activity android:name=".AttendanceActivity" />
         <activity android:name=".EmpActivity" />
         <activity android:name=".NewCounterActivity" />
         <activity android:name=".NewEmployeeActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".FeedbackActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

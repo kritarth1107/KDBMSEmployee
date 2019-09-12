@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TaskAssignActivity">
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         app:title="Assign Tasks"
         app:titleTextColor="@color/white"
         android:id="@+id/toolbar"

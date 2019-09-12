@@ -36,16 +36,55 @@ public class Attendance {
         this.counter = counter;
     }
 
-    public Attendance(String empid, String attendance, String empname, String counter) {
+
+
+    String empname;
+    String counter;
+    String date,day,month,year;
+
+    public Attendance(String empid, String attendance, String empname, String counter, String date, String day, String month, String year) {
         this.empid = empid;
         this.attendance = attendance;
         this.empname = empname;
         this.counter = counter;
+        this.date = date;
+        this.day = day;
+        this.month = month;
+        this.year = year;
     }
 
-    String empname;
-    String counter;
+    public String getDate() {
+        return date;
+    }
 
- public Attendance(){}
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public Attendance(){}
 
 }

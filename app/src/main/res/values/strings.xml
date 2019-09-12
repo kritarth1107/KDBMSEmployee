@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">KDBMS Employee</string>
+    <string name="app_name">KDBMS Feedback</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="spinner_title">Select Counter</string>

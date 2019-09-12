@@ -1,12 +1,12 @@
 package agrawal.kritarth.kdbmsemployee;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,9 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import agrawal.kritarth.kdbmsemployee.Adapter.AttendanceAdapter;
-import agrawal.kritarth.kdbmsemployee.Adapter.EmployeeAdapter;
 import agrawal.kritarth.kdbmsemployee.model.Attendance;
-import agrawal.kritarth.kdbmsemployee.model.Employee;
 
 public class AttendanceActivity extends AppCompatActivity {
     String date;

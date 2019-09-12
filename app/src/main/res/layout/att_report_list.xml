@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+    <RelativeLayout
+    android:id="@+id/reportAttRL"
+    android:layout_width="200dp"
+    android:layout_height="wrap_content">
+    <TextView
+        android:textSize="20sp"
+        android:id="@+id/empName_Report"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Employee Name"
+        android:textColor="@android:color/black"/>
+</RelativeLayout>
+    <RelativeLayout
+        android:layout_toLeftOf="@id/reportAttRL3"
+        android:id="@+id/reportAttRL2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/PresentDays"
+            android:textSize="20sp"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00 Days"
+            android:textColor="@android:color/black"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_alignParentRight="true"
+        android:id="@+id/reportAttRL3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/AbsentDays"
+            android:textSize="20sp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00 Days"
+            android:textColor="@android:color/black"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_below="@id/reportAttRL"
+        android:id="@+id/reportAttRL4"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/employeeCounter_Report"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Counter Name"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_below="@id/reportAttRL4"
+        android:id="@+id/reportAttRL5"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/employeePhone_Report"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Phone Number"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_marginTop="10dp"
+        android:background="@color/Grey"
+        android:layout_below="@id/reportAttRL5"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" >
+
+    </View>
+</RelativeLayout>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AttendanceActivity">
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         app:title="Attendance"
         app:titleTextColor="@color/white"
         android:id="@+id/toolbar"
@@ -20,7 +20,7 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         >
 
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 <RelativeLayout
     android:padding="5dp"
     android:layout_below="@id/toolbar"
@@ -35,11 +35,11 @@
         android:textStyle="bold"
         android:textSize="20sp"/>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/attRV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/dateText"></android.support.v7.widget.RecyclerView>
+        android:layout_below="@id/dateText"></androidx.recyclerview.widget.RecyclerView>
 
 </RelativeLayout>
 </RelativeLayout>

@@ -3,16 +3,14 @@ package agrawal.kritarth.kdbmsemployee.Adapter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,12 +25,8 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
-import agrawal.kritarth.kdbmsemployee.EmpActivity;
-import agrawal.kritarth.kdbmsemployee.MainActivity;
 import agrawal.kritarth.kdbmsemployee.R;
 import agrawal.kritarth.kdbmsemployee.model.Attendance;
-import agrawal.kritarth.kdbmsemployee.model.Employee;
-import agrawal.kritarth.kdbmsemployee.model.Task;
 
 public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceAdapter.ViewHolder> {
     String date;
@@ -80,13 +74,12 @@ public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceAdapter.Vi
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                                    Attendance attendance1 = snapshot.getValue(Attendance.class);
+                                    final Attendance attendance1 = snapshot.getValue(Attendance.class);
                                     String empid = attendance1.getEmpname();
                                     if(holder.EmployeeName.getText().toString().equals(empid)){
-                                        HashMap<String, Object> hashMap = new HashMap<>();
+                                        final HashMap<String, Object> hashMap = new HashMap<>();
                                         hashMap.put("attendance","Absent");
                                         snapshot.getRef().updateChildren(hashMap);
-
 
                                     }
 
@@ -101,7 +94,14 @@ public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceAdapter.Vi
                             }
                         });
 
+                        final DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference("Attendance-Report");
+                        final HashMap<String, Object> hashMap = new HashMap<>();
+                        hashMap.put("empname","Santosh");
+                        hashMap.put("absent",+1);
+                        databaseReference.child("2019").child("Aug").child("Report").push().setValue(hashMap);
+
                     }
+
 
 
                 });
@@ -150,6 +150,13 @@ public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceAdapter.Vi
 
                             }
                         });
+
+                        final DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference("Attendance-Report");
+                          final HashMap<String, Object> hashMap = new HashMap<>();
+                             hashMap.put("empname","Santosh");
+                             hashMap.put("present",+1);
+                             databaseReference.child("2019").child("Aug").child("Report").push().setValue(hashMap);
+
 
                     }
 
